@@ -1,0 +1,14 @@
+{
+  "name": "xhrpoly",
+  "repo": "tipm/xhrpoly",
+  "description": "Titanium XHR polyfill for Web Library Compatibility",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {},
+  "development": {},
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}
