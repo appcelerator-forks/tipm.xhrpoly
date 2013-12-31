@@ -4,6 +4,14 @@
  * compatible with web based XHR libraries
  */
 
+// Global Context
+
+var globalCTX = (function(){ return this; })();
+
+// Patch global scope
+
+globalCTX.XMLHttpRequest = XMLHttpRequest;
+
 // expose XMLHttpRequest
 
 module.exports = XMLHttpRequest;
