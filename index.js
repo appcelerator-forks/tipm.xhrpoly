@@ -12,6 +12,10 @@ var globalCTX = (function(){ return this; })();
 
 globalCTX.XMLHttpRequest = XMLHttpRequest;
 
+// sub for browser global location property.
+
+globalCTX.location = {};
+
 // expose XMLHttpRequest
 
 module.exports = XMLHttpRequest;
@@ -66,18 +70,4 @@ Object.defineProperties(XMLHttpRequest.prototype, {
 
 XMLHttpRequest.prototype.getAllResponseHeaders = function() {
   return '';
-};
-
-/**
- * inject the XMLHttpRequest namespace
- * into the global scope
- *
- * @param  {Object} ctx
- * @return {Null}
- * @api public
- */
-
-XMLHttpRequest.patch = function (ctx){
-  ctx.XMLHttpRequest = XMLHttpRequest;
-  ctx.location = {};
 };
