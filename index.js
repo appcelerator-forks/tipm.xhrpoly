@@ -1,8 +1,9 @@
-
 /**
  * xhr polyfill to make titaniums XHR library
  * compatible with web based XHR libraries
  */
+
+var Emitter = require('component-emitter');
 
 // Global Context
 
@@ -25,20 +26,38 @@ module.exports = XMLHttpRequest;
  */
 
 function XMLHttpRequest() {
-
+  var self = this;
   // titanium xhr client
-
   this._proxy =  Ti.Network.createHTTPClient();
-
-  // mapping for compatible functions
-
-  this.getResponseHeader = this._proxy.getResponseHeader;
-  this.open = this._proxy.open;
-  this.send = this._proxy.send;
-  this.setRequestHeader = this._proxy.setRequestHeader;
-  this.abort = this._proxy.abort;
+  this.upload = {
+    onprogress: function(){}
+  }
+  this._proxy.onsendstream = function(e){
+    self.upload.onprogress({loaded:e.progress, total:1});
+  }
 }
 
+XMLHttpRequest.prototype.__proto__ = Emitter.prototype;
+
+XMLHttpRequest.prototype.abort = function() {
+  this._proxy.abort();
+};
+
+XMLHttpRequest.prototype.open = function(method, url, async) {
+  this._proxy.open(method, url, async);
+};
+
+XMLHttpRequest.prototype.getResponseHeader = function(name) {
+  this._proxy.getResponseHeader(name);
+};
+
+XMLHttpRequest.prototype.send = function(data) {
+  this._proxy.send(data);
+};
+
+XMLHttpRequest.prototype.setRequestHeader = function(key, val) {
+  this._proxy.setRequestHeader(key, val);
+};
 
 Object.defineProperties(XMLHttpRequest.prototype, {
    'onreadystatechange' : {
