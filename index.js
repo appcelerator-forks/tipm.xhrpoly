@@ -48,7 +48,7 @@ XMLHttpRequest.prototype.open = function(method, url, async) {
 };
 
 XMLHttpRequest.prototype.getResponseHeader = function(name) {
-  this._proxy.getResponseHeader(name);
+  return this._proxy.getResponseHeader(name);
 };
 
 XMLHttpRequest.prototype.send = function(data) {
