@@ -3,7 +3,7 @@
  * compatible with web based XHR libraries
  */
 
-var Emitter = require('component-emitter');
+var Emitter = require('emitter');
 
 // Global Context
 
